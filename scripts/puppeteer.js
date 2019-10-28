@@ -10,15 +10,22 @@ const run = async () => {
 
   await page.goto('https://yle.fi/uutiset', { waitUntil: 'networkidle0' })
   let result = await page.evaluate(() => {
+
     return $('.yle__article__listItem__link')
         .toArray()
         .map((el) => {
             return {
                 link: window.location.origin + $(el).attr('href'),
-                title: $(el).find('h1').text()
+                title: $(el).find('h1').text(),
+                time: $(el).find('time').text()
+              
             }
+          
         })
   })
+  await page.screenshot({path: 'screenshot.png'});
+  await page.emulateMedia('screen');
+  await page.pdf({path: 'page.pdf'});
 
   console.log(result)
 
