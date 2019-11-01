@@ -1,0 +1,11 @@
+{
+  "name": "unittests",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "jasmine": "^3.5.0",
+    "mocha": "^6.2.2",
+    "nyc": "^14.1.1"
+  }
+}
