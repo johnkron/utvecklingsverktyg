@@ -3,14 +3,16 @@
 const run = () => {
     // create an array
     // in Javascript arrays can contain any type of variable. String, Number, Object or even Array
-    let myArray = ['1', 1, {}, []]
+    let myArray = ['1', 1, {}, '1']
 
     // Access index into an array item
     let first = myArray[0]
     console.log('first', first)
     let second = myArray[1]
     console.log('second', second)
-
+    let third = myArray[2]
+    console.log('third', third)
+  
     // check array length, will print out 4
     console.log('array length', myArray.length)
 
