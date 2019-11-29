@@ -30,33 +30,51 @@ class Game {
 
             System.out.println(player.getName() + ", your current hand is: \n");
             System.out.println(printHand(player.getHand()));
-            System.out.println("Select cards to swap:");
+            System.out.println("Select cards to swap, type n to swap no cards:");
             String cardsToSwap = scanner.next();
-            String[] swapCards = cardsToSwap.split(",");
-            for(int i = 0; i < swapCards.length; i++) {
-                int position = Integer.parseInt(swapCards[i].trim());
-                player.swapCard(position, deck.deal());
+            if (!cardsToSwap.trim().equals("n")) { 
+                String[] swapCards = cardsToSwap.split(",");
+                for(int i = 0; i < swapCards.length; i++) {
+                    int position = Integer.parseInt(swapCards[i].trim());
+                    player.swapCard(position, deck.deal());
+                }
+                System.out.println("Your hand after swap is:");
             }
 
-            System.out.println("Your hand after swap is:");
             System.out.println(printHand(player.getHand()));
 
             int chipsWon = 0;
+            boolean youWin = true;
+            String whatYouHave = "";
             ArrayList<Card> hand = player.getHand();
             if (PokerRules.hasRoyalStraightFlush(hand)) {
                 chipsWon = bet * 200;
+                whatYouHave = "Royal straight flush";
             } else if (PokerRules.hasFullHouse(hand)) {
                 chipsWon = bet * 10;
+                whatYouHave = "Full house";
             } else if (PokerRules.hasFlush(hand)) {
                 chipsWon = bet * 8;
+                whatYouHave = "Flush";
             } else if (PokerRules.hasStraight(hand)) {
                 chipsWon = bet * 6;
+                whatYouHave = "Straight";
             } else if (PokerRules.hasThreeOfAKind(hand)) {
                 chipsWon = bet * 4;
+                whatYouHave = "Three of a kind";
             } else if (PokerRules.hasTwoPairs(hand)) {
                 chipsWon = bet * 3;
+                whatYouHave = "Two pairs";
             } else if (PokerRules.hasPair(hand)) {
                 chipsWon = bet * 2;
+                whatYouHave = "One Pair";
+            } else {
+                youWin = false;
+            }
+
+            if (youWin) {
+                System.out.println("Congratulations You Won!");
+                System.out.println("You have " + whatYouHave + ", this got you " + Integer.toString(chipsWon) + " chips!");
             }
 
             player.addChips(chipsWon);
@@ -72,6 +90,7 @@ class Game {
     }
 
     private void dealPlayerHand(Player player, Deck deck) {
+        player.clearPlayerHand();
         for(int i = 0; i < 5; i++) {
             player.addCard(deck.deal());
         }

@@ -13,6 +13,10 @@ class Player {
         name = "";
     }
 
+    public void clearPlayerHand() {
+        hand = new ArrayList<Card>();
+    }
+
     public void removeChips(int removeChips) {
         chips = chips - removeChips;
     }

@@ -24,6 +24,9 @@ class Deck {
     }
 
     public Card deal() {
+        if (cards.isEmpty()) {
+            shuffle();
+        }
         return cards.pop();
     }
 

@@ -23,11 +23,11 @@ class PokerRules {
         int sum = 0;
         for (int i = 0; i < 5; i++) {
             if (lastRank > 0) {
-                sum = lastRank - hand.get(i).getRank();
+                sum = sum + (lastRank - hand.get(i).getRank());
             }
             lastRank = hand.get(i).getRank();
         }
-        return sum == 5 || PokerRules.hasAceHighStraight(hand);
+        return sum == 4 || PokerRules.hasAceHighStraight(hand);
     }
 
     static boolean hasAceHighStraight(ArrayList<Card> hand) {
@@ -40,7 +40,7 @@ class PokerRules {
     }
 
     static boolean hasRoyalStraightFlush(ArrayList<Card> hand) {
-        return PokerRules.hasFlush(hand) && PokerRules.hasStraight(hand);
+        return PokerRules.hasFlush(hand) && PokerRules.hasAceHighStraight(hand);
     }
 
     static boolean hasThreeOfAKind(ArrayList<Card> hand) {
@@ -76,7 +76,18 @@ class PokerRules {
 
 
     static boolean hasFourOfAKind(ArrayList<Card> hand) {
-        return false;
+        ArrayList<Integer> list = new ArrayList<Integer>();
+        boolean fourOfAKind = false;
+        for (int i = 0; i < 5; i++) {
+            list.add(hand.get(i).getRank());
+        }
+        for (Integer rank : list) {
+            if (Collections.frequency(list, rank) == 4) {
+                fourOfAKind = true;
+            }
+
+        }
+        return fourOfAKind;    
     }
 
     static boolean hasFullHouse(ArrayList<Card> hand) {
@@ -84,14 +95,18 @@ class PokerRules {
     }
 
     static boolean hasPair(ArrayList<Card> hand) {
-        HashSet set = new HashSet<>();
-        boolean hasPair = false;
+        ArrayList<Integer> list = new ArrayList<Integer>();
+        boolean fourOfAKind = false;
         for (int i = 0; i < 5; i++) {
-            if (set.add(hand.get(i).getRank()) == false) {
-                hasPair = true;
-            }
+            list.add(hand.get(i).getRank());
         }
-        return hasPair;
+        for (Integer rank : list) {
+            if (Collections.frequency(list, rank) == 2) {
+                fourOfAKind = true;
+            }
+
+        }
+        return fourOfAKind;
     }
 
 }
