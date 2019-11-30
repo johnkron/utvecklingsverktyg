@@ -5,7 +5,8 @@ const run = () => {
     let animal = {
         type: 'dog',
         color: 'brown',
-        numberOfLegs: 4
+        numberOfLegs: 3,
+        name: 'peepeepoopooo',
     }
 
     console.log('my animal object', animal)
@@ -15,10 +16,10 @@ const run = () => {
 
     // objects can also contain functions
     let anotherAnimal = {
-        type: 'cat',
+        type: 'cat6',
         color: 'black',
         whatDoesItSay: function() {
-            return 'Meow!'
+            return 'Wof!'
         }
     }
 

@@ -3,7 +3,7 @@
 const run = () => {
     // create an array
     // in Javascript arrays can contain any type of variable. String, Number, Object or even Array
-    let myArray = ['1', 1, {}, []]
+    let myArray = ['weener1', 1, {}, []]
 
     // Access index into an array item
     let first = myArray[0]
